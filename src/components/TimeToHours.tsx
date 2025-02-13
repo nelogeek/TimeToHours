@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { TextField, Container, Typography, Box, Paper } from "@mui/material";
+import { TextField, Container, Typography, Box, Paper, useMediaQuery } from "@mui/material";
 
 export default function TimeConverter() {
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const handleHoursChange = (e) => {
     const value = e.target.value.replace(/\D/g, ""); // Удаляем нецифровые символы
@@ -37,8 +38,8 @@ export default function TimeConverter() {
         color: "#fff", 
         border: "2px solid #555" 
       }}>
-        <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: "#ff5733" }}>⚡ Конвертер времени</Typography>
-        <Box display="flex" gap={2}>
+        <Typography variant={isMobile ? "h5" : "h4"} gutterBottom fontWeight="bold" sx={{ color: "#ff5733" }}>⚡ Конвертер времени</Typography>
+        <Box display="flex" flexDirection={isMobile ? "column" : "row"} gap={2}>
           <TextField
             label="Часы"
             variant="filled"
@@ -68,7 +69,7 @@ export default function TimeConverter() {
             }}
           />
         </Box>
-        <Typography variant="h5" sx={{ marginTop: 3, fontWeight: "bold", color: "#ff5733" }}>⏰ Результат: {convertedTime} ч</Typography>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ marginTop: 3, fontWeight: "bold", color: "#ff5733" }}>⏰ Результат: {convertedTime} ч</Typography>
       </Paper>
     </Container>
   );
