@@ -18,14 +18,16 @@ export default function TimeConverter() {
   const convertedTime = ((parseInt(hours || 0) * 60 + parseInt(minutes || 0)) / 60).toFixed(2);
 
   return (
-    <Container maxWidth="sm" sx={{ 
+    <Container maxWidth={false} disableGutters sx={{ 
       display: "flex", 
       flexDirection: "column", 
       alignItems: "center", 
       justifyContent: "center", 
       height: "100vh", 
+      width: "100vw", 
       background: "#1a1a1a", 
-      color: "#fff" 
+      color: "#fff",
+      overflow: "hidden"
     }}>
       <Paper elevation={10} sx={{ 
         padding: 4, 
