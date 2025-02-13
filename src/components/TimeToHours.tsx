@@ -2,21 +2,21 @@ import { useState } from "react";
 import { TextField, Container, Typography, Box, Paper, useMediaQuery } from "@mui/material";
 
 export default function TimeConverter() {
-  const [hours, setHours] = useState("");
-  const [minutes, setMinutes] = useState("");
+  const [hours, setHours] = useState<string>("");
+  const [minutes, setMinutes] = useState<string>("");
   const isMobile = useMediaQuery("(max-width:600px)");
 
-  const handleHoursChange = (e) => {
+  const handleHoursChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ""); // Удаляем нецифровые символы
     setHours(value);
   };
 
-  const handleMinutesChange = (e) => {
+  const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
     setMinutes(value);
   };
 
-  const convertedTime = ((parseInt(hours || 0) * 60 + parseInt(minutes || 0)) / 60).toFixed(2);
+  const convertedTime = ((parseInt(String(hours || "0")) * 60 + parseInt(String(minutes || "0"))) / 60).toFixed(2);
 
   return (
     <Container maxWidth={false} disableGutters sx={{ 
@@ -38,7 +38,9 @@ export default function TimeConverter() {
         color: "#fff", 
         border: "2px solid #555" 
       }}>
-        <Typography variant={isMobile ? "h5" : "h4"} gutterBottom fontWeight="bold" sx={{ color: "#ff5733" }}>⚡ Конвертер времени</Typography>
+        <Typography variant={isMobile ? "h5" : "h4"} gutterBottom fontWeight="bold" sx={{ color: "#ff5733" }}>
+          ⚡ Конвертер времени
+        </Typography>
         <Box display="flex" flexDirection={isMobile ? "column" : "row"} gap={2}>
           <TextField
             label="Часы"
@@ -69,7 +71,9 @@ export default function TimeConverter() {
             }}
           />
         </Box>
-        <Typography variant={isMobile ? "h6" : "h5"} sx={{ marginTop: 3, fontWeight: "bold", color: "#ff5733" }}>⏰ Результат: {convertedTime} ч</Typography>
+        <Typography variant={isMobile ? "h6" : "h5"} sx={{ marginTop: 3, fontWeight: "bold", color: "#ff5733" }}>
+          ⏰ Результат: {convertedTime} ч
+        </Typography>
       </Paper>
     </Container>
   );
